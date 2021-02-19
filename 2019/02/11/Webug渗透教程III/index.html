@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="AJDX3906采坑之路"><title>Webug渗透教程III | AJDX3906的营养目标</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Webug渗透教程III</h1><a id="logo" href="/.">AJDX3906的营养目标</a><p class="description">Code the Future, change the world!</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Webug渗透教程III</h1><div class="post-meta">2019-02-11<span> | </span><span class="category"><a href="/categories/Webug/">Webug</a></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E9%83%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">头部的一个注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E4%BB%98%E9%97%AE%E9%A2%98-%E7%94%A8%E6%9C%80%E5%B0%91%E7%9A%84%E9%92%B1%E5%8E%BB%E8%B4%AD%E4%B9%B0%E7%89%A9%E5%93%81"><span class="toc-number">2.</span> <span class="toc-text">支付问题-用最少的钱去购买物品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83%E3%80%82"><span class="toc-number">3.</span> <span class="toc-text">越权。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF%E2%80%94%E2%80%94%E7%AE%A1%E7%90%86%E5%91%98%E6%AF%8F%E6%99%9A10%E7%82%B9%E4%B8%8A%E7%BA%BF"><span class="toc-number">4.</span> <span class="toc-text">CSRF——管理员每晚10点上线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">参考链接：</span></a></li></ol></div></div><div class="post-content"><p>Webug渗透教程III</p>
+<p>第五题：头部注入，Burp suite。第六题：逻辑漏洞。第七题：越权。第八题：CSRF，Burp suite。</p>
+<a id="more"></a>
+
+<h3 id="头部的一个注入"><a href="#头部的一个注入" class="headerlink" title="头部的一个注入"></a>头部的一个注入</h3><hr>
+<p>1.常见的头部注入</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>用处</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Referer</td>
+<td>来源</td>
+</tr>
+<tr>
+<td>X-Forwarded-For</td>
+<td>获取ip</td>
+</tr>
+<tr>
+<td>client_ip</td>
+<td>获取ip</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>获取cookie值</td>
+</tr>
+<tr>
+<td>User-agent</td>
+<td>浏览器版本</td>
+</tr>
+</tbody></table>
+<p>2.对本题尝试X-Forwarded-For注入。<img src="/images/webug3/1.png"></p>
+<p>3.应该是sql注入，尝试注入。</p>
+<p><img src="/images/webug3/2.png"></p>
+<p>4.应该和第一题一样，直接取flag。</p>
+<p><img src="/images/webug3/3.png"></p>
+<hr>
+<h3 id="支付问题-用最少的钱去购买物品"><a href="#支付问题-用最少的钱去购买物品" class="headerlink" title="支付问题-用最少的钱去购买物品"></a>支付问题-用最少的钱去购买物品</h3><hr>
+<p>1.后面一题提供了账号密码：tom/123456，登陆上去</p>
+<p><img src="/images/webug3/4.png"></p>
+<p>2.输入购买数量，用burp拦截一下，修改参数。</p>
+<p>应该是个逻辑漏洞，总价少于0，就会返回“不要尝试白拿书”。</p>
+<p><img src="/images/webug3/5.png"></p>
+<p>3.修改总价等于0。</p>
+<p><img src="/images/webug3/6.png"></p>
+<hr>
+<h3 id="越权。"><a href="#越权。" class="headerlink" title="越权。"></a>越权。</h3><hr>
+<p>1.点击修改密码，拦截</p>
+<p>关键点在 <strong><em>name=value</em></strong></p>
+<p><img src="/images/webug3/7.png"></p>
+<p>2.将 tom改为admin, 修改密码，即可成功修改 admin 的密码。</p>
+<p><img src="/images/webug3/8.png"></p>
+<hr>
+<h3 id="CSRF——管理员每晚10点上线"><a href="#CSRF——管理员每晚10点上线" class="headerlink" title="CSRF——管理员每晚10点上线"></a>CSRF——管理员每晚10点上线</h3><hr>
+<p>1.刚开始以为是修改Http头的date字段，修改请求时间为晚十点，直到后来看到了CSRF。</p>
+<p>2.应该是跨站请求伪造，使用表单来对 POST 型的请求进行伪造。</p>
+<p>burp拦截，修改name字段，构造CSRF</p>
+<p><img src="/images/webug3/9.png"></p>
+<p><img src="/images/webug3/10.png"></p>
+<p>3.打开链接，测试</p>
+<p><img src="/images/webug3/11.png"></p>
+<p><img src="/images/webug3/12.png"></p>
+<hr>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/csrf/">CSRF</a></p>
+<p><a target="_blank" rel="noopener" href="https://wps2015.org/2014/09/10/sql-injection-in-http-headers/">Http头部注入</a></p>
+</div><div class="tags"><a href="/tags/Burp-suite/"><i class="fa fa-tag"></i>Burp suite</a><a href="/tags/sql%E6%B3%A8%E5%85%A5/"><i class="fa fa-tag"></i>sql注入</a></div><div class="post-nav"><a class="pre" href="/2019/02/14/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIV/">Webug渗透教程IV</a><a class="next" href="/2019/02/09/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A1/">Webug渗透教程Ⅱ</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://AJDX3906.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-security/">Web-security</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webug/">Webug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a> <a href="/tags/Burp-suite/" style="font-size: 15px;">Burp suite</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 15px;">sql注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" style="font-size: 15px;">文件上传漏洞</a> <a href="/tags/XSS/" style="font-size: 15px;">XSS</a> <a href="/tags/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/" style="font-size: 15px;">图片隐写术</a> <a href="/tags/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">安全基础知识</a> <a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 15px;">Web安全</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E5%AF%86/" style="font-size: 15px;">字符串解密</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">机器学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/20/sql%E6%B3%A8%E5%85%A5%E6%80%BB%E7%BB%93/">Sql注入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/18/%E5%AD%97%E9%95%BF%E3%80%81%E5%AD%97%E8%8A%82%E3%80%81%E4%BD%8D/">字、字长、字节、位</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/17/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/14/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/11/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIII/">Webug渗透教程III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/09/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A1/">Webug渗透教程Ⅱ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/07/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A0/">Webug渗透教程I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/nazo.io%E9%A2%98%E8%A7%A3/">nazo.io</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/Web%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/">Web安全总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://weiweiyoo.github.io" title="weiweiyoo" target="_blank">weiweiyoo</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">AJDX3906的营养目标.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

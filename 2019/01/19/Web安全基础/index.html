@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="AJDX3906采坑之路"><title>Web安全基础 | AJDX3906的营养目标</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Web安全基础</h1><a id="logo" href="/.">AJDX3906的营养目标</a><p class="description">Code the Future, change the world!</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Web安全基础</h1><div class="post-meta">2019-01-19<span> | </span><span class="category"><a href="/categories/Web-security/">Web-security</a></span></div><div class="post-content"><p>《Web安全深度剖析》学习总结, 本部分主要包括WEB安全的基础知识和HTTP协议相关。</p>
+<a id="more"></a>
+
+<h1 id="Web安全简介"><a href="#Web安全简介" class="headerlink" title="Web安全简介"></a>Web安全简介</h1><p>Web服务默认运行在服务器的80端口之上(http服务器)，https服务器默认443端口。</p>
+<p>服务器风险点如下图：<br><img src="/images/%E5%AE%89%E5%85%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E7%82%B9.png" alt="服务器风险点"><br>直接对目标攻击的三种手段：</p>
+<ul>
+<li><p><strong>C段渗透</strong>： 攻击者通过渗透同一网段内的一台主机，对目标主机进行ARP等手段的渗透。</p>
+</li>
+<li><p><strong>ARP攻击：</strong> ARP（地址解析协议）位于TCP/IP协议栈中的网络层，负责将某个IP地址解析成对应的MAC地址。ARP攻击仅能在以太网（局域网如：机房、内网、公司网络等）进行，无法对外网（互联网、非本区域内的局域网）进行攻击。</p>
+</li>
+<li><p><strong>ARP攻击原理：</strong></p>
+<p>​     ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。</p>
+<p>​    攻击者向电脑A发送一个伪造的ARP响应，告诉电脑A：电脑B的IP地址192.168.0.2对应的MAC地址是00-aa-00-62-c6-03，电脑A信以为真，将这个对应关系写入自己的ARP缓存表中，以后发送数据时，将本应该发往电脑B的数据发送给了攻击者。同样的，攻击者向电脑B也发送一个伪造的ARP响应，告诉电脑B：电脑A的IP地址192.168.0.1对应的MAC地址是00-aa-00-62-c6-03，电脑B也会将数据发送给攻击者。至此攻击者就控制了电脑A和电脑B之间的流量，他可以选择被动地监测流量，获取密码和其他涉密信息，也可以伪造数据，改变电脑A和电脑B之间的通信内容。</p>
+</li>
+<li><p><strong>社会工程学</strong>：渗透服务器有时不只靠技术，即”攻城为下，攻心为上”。</p>
+</li>
+<li><p><strong>Services</strong>: 很多传统攻击方式直接针对服务进行溢出。Web作为服务之一，有多种渗透方式。</p>
+</li>
+<li><p><strong>缓冲区溢出攻击：</strong> </p>
+<p>​    缓冲区溢出是指当计算机向缓冲区内填充数据位数时超过了缓冲区本身的容量，溢出的数据覆盖在合法数据上。理想的情况是：程序会检查数据长度，而且并不允许输入超过缓冲区长度的字符。但是绝大多数程序都会假设数据长度总是与所分配的储存空间相匹配，这就为缓冲区溢出埋下隐患。操作系统所使用的缓冲区，又被称为“堆栈”，在各个操作进程之间，指令会被临时储存在“堆栈”当中，“堆栈”也会出现缓冲区溢出。</p>
+<p>​    缓冲区溢出攻击利用了缓冲区溢出的漏洞，通过往程序的缓冲区写超出其长度的内容，造成缓冲区的溢出，从而破坏程序的堆栈，使程序转而执行其它指令，以达到攻击的目的。利用缓冲区溢出攻击，可以导致程序运行失败、系统关机、重新启动等后果。</p>
+</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>URL(统一资源定位符)，格式: <code>协议://服务器IP[:端口]/路径/[?查询]</code></p>
+<p>Linux系统下， <code>curl http网址</code> 命令可以发起http请求，会返回页面的HTML数据。添加<code>-I</code>参数，即 <code>curl http网址 -I</code> 返回http响应头。</p>
+<p>HTTP协议经历了三个版本：</p>
+<ul>
+<li>HTTP/0.9: 只接受GET一种请求方法，没有在通讯中指定版本号，且不支持请求头。由于该版本不支持POST方法，因此客户端无法向服务器传递太多信息。</li>
+<li>HTTP/1.0: 第一个在通讯中指定版本号的HTTP协议版本，至今仍被广泛采用，特别是在代理服务器中。相对于HTTP 0.9 ,增加了POST和HEAD命令，增加了头信息，支持长连接（但默认还是使用短连接），缓存机制，以及身份认证，响应对象不只限于HTML，增加了状态码等。</li>
+<li>HTTP/1.1: 目前主流的HTTP协议版本,使用最广泛。相对于HTTP 1.0，默认采用长连接，支持以管道方式在同时发送多个请求，以便降低线路负载，提高传输速度，请求与响应支持Host头域，Content-Length字段，分块传输编码，增加了PUT、DELETE等方法。</li>
+<li>HTTP/2： 下一代HTTP协议，目前应用还比较少。特点，二进制协议、多路复用、数据流、头部压缩、随时复位、Server Push、优先权和依赖。</li>
+</ul>
+<h2 id="HTTP协议详解"><a href="#HTTP协议详解" class="headerlink" title="HTTP协议详解"></a>HTTP协议详解</h2><p>以HTTP/1.1为例，描述HTTP请求与响应如下。</p>
+<p><strong>HTTP请求：</strong> 包括请求行(请求方法)、请求头(消息报头)、请求正文(请求体)。<br><img src="/images/%E5%AE%89%E5%85%A8/http%E8%AF%B7%E6%B1%82.png" alt="http请求"><br>HTTP请求的第一行为请求行，由三部分组成，<code>POST</code>表示请求方法，<code>/login.php</code>表示请求路径(该域名根目录下的login.php)，<code>HTTP/1.1</code>表示HTTP版本。</p>
+<p>第二行至空白行为HTTP请求头，<code>HOST</code>表示请求的主机地址，<code>User-Agent</code>表示浏览器标识。请求头由客户端自行设定。</p>
+<p>空白行之后为请求正文(请求体)，请求正文是可选的，通常出现在POST方法中，GET方法不含请求体。</p>
+<p><strong>HTTP响应：</strong> 包括响应行、响应头(消息报头)、响应正文(响应体)。<br><img src="/images/%E5%AE%89%E5%85%A8/http%E5%93%8D%E5%BA%94.png" alt="http响应"></p>
+<h3 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h3><ul>
+<li><p>GET<br>GET方法用于获取请求页面的指定信息(以实体的格式)，如果请求资源为动态脚本(非HTML)，则返回文本是Web容器解析后的HTML源代码，而不是源文件。如请求<code>index.jsp</code>，返回的不是<code>index.jsp</code>的源文件，而是经过解析后的HTML代码。GET方法可以通过查询参数携带数据传递给服务器端，但发送的数据会显示在浏览器，并且有长度限制。</p>
+</li>
+<li><p>HEAD<br>该方法除了服务器不返回响应体外，其他与GET相同。通常用来测试超链接的有效性、可访问性、最近的改变，攻击者编写扫描工具时通常用此方法，只测试资源是否存在，不返回消息主体，速度最快。</p>
+</li>
+<li><p>POST<br>POST与GET类似，区别是，GET没有请求体，POST包含请求体。POST多用于向服务器发送大量数据，安全性也较高一点。如上传文件、提交留言等。</p>
+</li>
+<li><p>PUT<br>请求服务器将请求中的实体存储在请求资源下。通常服务器会关闭PUT方法，因为会在服务器建立文件，属于危险方法之一。</p>
+</li>
+<li><p>DELETE<br>请求服务器删除请求的指定资源。通常服务器会关闭DELETE方法，属于危险方法之一。</p>
+</li>
+<li><p>TRACE<br>允许客户端查看服务器端接收消息的情况，回显服务器收到的请求，此方法很少见。</p>
+</li>
+<li><p>CONNECT<br>为了能动态切换到隧道代理。<br>【HTTP隧道：】是HTTP/1.1中引入的功能，主要为了解决明文的HTTP代理无法代理跑在TLS中的流量(https)的问题，同时提供了作为任意流量的TCP通道的能力。<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21955083">什么是HTTP隧道，怎么理解HTTP隧道</a>。<br>HTTP隧道技术可以理解为把所有要传送的数据全部封装到HTTP协议里进行传送。<br>客户端与服务器之间的中间层：代理，网关，或者隧道。</p>
+</li>
+<li><p>OPTIONS<br>用于请求由URI标识的资源在通信过程中可以使用的功能选项。<br><img src="/images/%E5%AE%89%E5%85%A8/%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94.png"></p>
+</li>
+</ul>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><ul>
+<li>1XX: 信息提示，表示请求已被成功接收，继续处理。100~101</li>
+<li>2XX：成功，服务器成功处理了请求。200~206</li>
+<li>3XX: 重定向。300~305</li>
+<li>4XX: 客户端错误，客户端发送一些服务器无法处理的信息，例如格式错误的请求、请求一个不存在的URL。400~415</li>
+<li>5XX: 服务器错误。500~505</li>
+</ul>
+<p><img src="/images/%E5%AE%89%E5%85%A8/%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81.png"></p>
+<h3 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h3><p>HTTPS在HTTP之下加入SSL层，可以保护数据的隐私性和完整性。</p>
+<ul>
+<li>HTTP传输的是明文，HTTPS则是具有安全性的SSL加密传输协议</li>
+<li>HTTP 80端口，HTTPS 443端口</li>
+<li>HTTPS需要申请CA证书</li>
+</ul>
+</div><div class="tags"><a href="/tags/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa fa-tag"></i>安全基础知识</a></div><div class="post-nav"><a class="pre" href="/2019/01/22/%E8%AE%A4%E8%AF%86%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">认识字符编码</a><a class="next" href="/2018/06/03/%E4%B8%80%E5%8F%AA%E7%8C%AB%E7%9A%84%E5%BF%83%E6%80%9D/">一只猫的心思</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://AJDX3906.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-security/">Web-security</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webug/">Webug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a> <a href="/tags/Burp-suite/" style="font-size: 15px;">Burp suite</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 15px;">sql注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" style="font-size: 15px;">文件上传漏洞</a> <a href="/tags/XSS/" style="font-size: 15px;">XSS</a> <a href="/tags/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/" style="font-size: 15px;">图片隐写术</a> <a href="/tags/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">安全基础知识</a> <a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 15px;">Web安全</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E5%AF%86/" style="font-size: 15px;">字符串解密</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">机器学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/20/sql%E6%B3%A8%E5%85%A5%E6%80%BB%E7%BB%93/">Sql注入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/18/%E5%AD%97%E9%95%BF%E3%80%81%E5%AD%97%E8%8A%82%E3%80%81%E4%BD%8D/">字、字长、字节、位</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/17/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/14/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/11/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIII/">Webug渗透教程III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/09/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A1/">Webug渗透教程Ⅱ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/07/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A0/">Webug渗透教程I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/nazo.io%E9%A2%98%E8%A7%A3/">nazo.io</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/Web%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/">Web安全总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://weiweiyoo.github.io" title="weiweiyoo" target="_blank">weiweiyoo</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">AJDX3906的营养目标.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="AJDX3906采坑之路"><title>nazo.io | AJDX3906的营养目标</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">nazo.io</h1><a id="logo" href="/.">AJDX3906的营养目标</a><p class="description">Code the Future, change the world!</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">nazo.io</h1><div class="post-meta">2019-02-05<span> | </span><span class="category"><a href="/categories/Misc/">Misc</a></span></div><div class="post-content"><p>nazo.io 通关攻略</p>
+<h4 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h4><ul>
+<li>签到题，直接给出了Key，输入即可。</li>
+</ul>
+<h4 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h4><ul>
+<li><h4 id=""><a href="#" class="headerlink" title=""></a><img src="/images/nazo2.1.png" alt="nazo2.1"></h4></li>
+<li><p>这里注意到说明里 key 有下划线，发现是个超链接，点击可以得到 <u>key:gotcha</u></p>
+</li>
+</ul>
+<h4 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h4><ul>
+<li><img src="/images/nazo3.1.png"></li>
+<li>题目为**<em>从左往右念**</em>，内容是<u>“where is key”</u>。</li>
+<li>那么Key is <strong>where</strong></li>
+</ul>
+<h4 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h4><ul>
+<li><img src="/images/nazo4.1.png"></li>
+<li><strong>知名谚语</strong>：Life is a chain of moments of enjoyment, not only about <strong><u>survival</u></strong>.<br><strong>译文</strong>：生活是一个由快乐时光组成的链条，而绝不仅仅是一种生命的存在.</li>
+</ul>
+<h4 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h4><ul>
+<li><img src="/images/nazo5.1.png"></li>
+<li>摩斯电码对照表如图</li>
+<li><img src="/images/morse.png"></li>
+<li>对照 or 使用 <a target="_blank" rel="noopener" href="http://www.atool.org/morse.php">在线解密工具</a>可得到 <u>key: sos</u></li>
+</ul>
+<h4 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h4><ul>
+<li><p><img src="/images/nazo6.1.png"></p>
+</li>
+<li><p>Base64 顾名思义就是用 64 个可显示字符表示所有的 ASC 字符，64 也就是 6Bits，而 ASC 字符一共有 256 个，也就是 8Bits。Base64 编码要求把 3 个 8 位字节（3<em>8=24）转化为 4 个 6 位的字节（4</em>6=24），之后在 6 位的前面补两个 0，形成 8 位一个字节的形式。 如果剩下的字符不足 3 个字节，则用 0 填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现 <strong><u><em>1 或 2 个’=’</u></em></strong></p>
+</li>
+<li><p>使用 <a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/base64.htm">解密工具</a>解密后，<strong>key:1029174037</strong></p>
+</li>
+<li><p>也可使用Python编写脚本：</p>
+</li>
+<li><pre><code class="python">import basae64 s = ‘MTAyOTE3NDAzNw==’
+r = basae64.b64decode(s)
+print(r)
+</code></pre>
+</li>
+</ul>
+<h4 id="第七关"><a href="#第七关" class="headerlink" title="第七关"></a>第七关</h4><ul>
+<li><img src="/images/nazo7.1.png"></li>
+<li>“打开了OICQ，聊天记录停步去年的深秋”，这首许嵩的*<u>灰色头像</u>*，应该90后都很熟悉。</li>
+<li>QQ以前就叫OICQ，尝试添加上提的<strong>key</strong>为好友，在验证消息里发现<strong>了 key：macintosh</strong></li>
+</ul>
+<h4 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h4><ul>
+<li><p><img src="/images/nazo8.1.png"></p>
+</li>
+<li><p>域名系统。<u><code>错误的.世界</code></u> 是个中文域名，可以直接解析。</p>
+<p><img src="/images/8.2.png"></p>
+</li>
+<li><p>得到 <strong><u>key:saionjisekai</u></strong></p>
+</li>
+</ul>
+<h4 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h4><ul>
+<li><p><img src="/images/nazo9.1.png"></p>
+</li>
+<li><p>题目为角度，开始以为是换个角度，不要关注图像本身。就扔进WinHex里，发现没什么，binwalk也没结果。</p>
+</li>
+<li><p>后来关注图像本身，扔进Ps里，将图像拉长，得到题解。</p>
+<p><img src="/images/nazo9.2.png"></p>
+</li>
+<li><p>Tips: 这里提供两个在线PS网站：</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.photopea.com/">https://www.photopea.com/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://uzer.me/">https://uzer.me/</a></p>
+</li>
+</ul>
+<h4 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h4><ul>
+<li><img src="/images/nazo10.png"></li>
+<li>google搜图，上古时期的鼠标。</li>
+<li>Key ：mouse</li>
+</ul>
+<h4 id="第十一关"><a href="#第十一关" class="headerlink" title="第十一关"></a>第十一关</h4><ul>
+<li><img src="/images/11.1.png"></li>
+<li>可能部分手机字库支持不全看不了，不过这编码还是很有意思，下来研究一下再补充一下。</li>
+<li><u>key : <strong>neweroslesstofu</u></strong></li>
+</ul>
+<h4 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h4><ul>
+<li><p><img src="/images/nazo12.1.png"></p>
+</li>
+<li><p>大意是：有一个未知数需要猜测</p>
+<p>0A0B 代表不仅数字没猜对位置也没猜对</p>
+<p>0A2B 代表数字猜对了两个但是位置没猜对</p>
+<p>3A0B 代表着数字跟位置都猜对的有三位有一位数字跟位置都没猜对</p>
+</li>
+<li><p><u>Key : <strong>9506</strong></u></p>
+</li>
+</ul>
+<h4 id="第十三关"><a href="#第十三关" class="headerlink" title="第十三关"></a>第十三关</h4><ul>
+<li><img src="/images/nazo13.1.png"></li>
+<li>查看网页源代码，发现其实是个白底白字的一个图</li>
+<li><img src="/images/nazo13.2.png"></li>
+<li>打开图片，得到Key</li>
+<li><img src="/images/nazo13.3.png"></li>
+</ul>
+<h4 id="第十四关"><a href="#第十四关" class="headerlink" title="第十四关"></a>第十四关</h4><ul>
+<li><img src="/images/nazo14.1.png"></li>
+<li>查看源代码，发现有提示，一般也会查这个图。</li>
+<li><img src="/images/nazo14.2.png"></li>
+<li>把图下载下来，扔到WinHex / binwalk。</li>
+<li><img src="/images/nazo14.3.png"></li>
+<li>显然是隐写，改后缀.zip，里面是个种子。</li>
+<li><img src="/images/nazo14.5.png"></li>
+<li><img src="/images/nazo14.4.png"></li>
+<li><strong><u>Key：greendam</u></strong></li>
+</ul>
+<h4 id="第十五关"><a href="#第十五关" class="headerlink" title="第十五关"></a>第十五关</h4><ul>
+<li><img src="/images/nazo15.2.png"></li>
+<li>声音的轨迹，频谱图。</li>
+<li><img src="/images/nazo15.1.png"></li>
+<li><u>key : <strong>koenokiseki</u></strong></li>
+</ul>
+<h4 id="第十六关"><a href="#第十六关" class="headerlink" title="第十六关"></a>第十六关</h4><ul>
+<li><img src="/images/nazo16.1.png"></li>
+<li>查看源码，发现有个void2.svg，再审查元素，发现上面覆盖着其他的Svg，去除掉多余的。这里我改了<u>style=”fill:#xxx”</u></li>
+<li><img src="/images/nazo16.2.png"></li>
+<li><u><strong>key:secretvg</strong></u></li>
+</ul>
+<h4 id="第十七关"><a href="#第十七关" class="headerlink" title="第十七关"></a>第十七关</h4><ul>
+<li><img src="/images/nazo17.1.png"></li>
+<li>虚空，老方法检查元素</li>
+<li><img src="/images/nazo17.2.png"></li>
+<li>是一堆空格，仔细观察一下，里面混有两种空格，就是半角空格 (<strong>&amp;ensp</strong>) 和全角空格 (<strong>&amp;emsp</strong>)。</li>
+<li>复制到VSCode里，点选其中一种空格，貌似有规律</li>
+<li><img src="/images/nazo17.3.png"></li>
+<li>替换一下其中的空格</li>
+<li><img src="/images/nazo17.4.png"></li>
+<li><u><strong>key:ENTROPY</strong></u></li>
+</ul>
+<p>只是一个小游戏，还是很有意思的。🤭</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4></div><div class="tags"><a href="/tags/CTF/"><i class="fa fa-tag"></i>CTF</a></div><div class="post-nav"><a class="pre" href="/2019/02/07/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A0/">Webug渗透教程I</a><a class="next" href="/2019/01/25/Web%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/">Web安全总结</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://AJDX3906.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-security/">Web-security</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webug/">Webug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a> <a href="/tags/Burp-suite/" style="font-size: 15px;">Burp suite</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 15px;">sql注入</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" style="font-size: 15px;">文件上传漏洞</a> <a href="/tags/XSS/" style="font-size: 15px;">XSS</a> <a href="/tags/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/" style="font-size: 15px;">图片隐写术</a> <a href="/tags/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">安全基础知识</a> <a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 15px;">Web安全</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E5%AF%86/" style="font-size: 15px;">字符串解密</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">机器学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/20/sql%E6%B3%A8%E5%85%A5%E6%80%BB%E7%BB%93/">Sql注入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/18/%E5%AD%97%E9%95%BF%E3%80%81%E5%AD%97%E8%8A%82%E3%80%81%E4%BD%8D/">字、字长、字节、位</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/17/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/14/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIV/">Webug渗透教程IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/11/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8BIII/">Webug渗透教程III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/09/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A1/">Webug渗透教程Ⅱ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/07/Webug%E6%B8%97%E9%80%8F%E6%95%99%E7%A8%8B%E2%85%A0/">Webug渗透教程I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/nazo.io%E9%A2%98%E8%A7%A3/">nazo.io</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/25/Web%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/">Web安全总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://weiweiyoo.github.io" title="weiweiyoo" target="_blank">weiweiyoo</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">AJDX3906的营养目标.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
